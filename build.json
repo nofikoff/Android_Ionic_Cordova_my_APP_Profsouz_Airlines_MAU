@@ -1,0 +1,22 @@
+{
+    "ios": {
+        "debug": {
+            "codeSignIdentity": "Ruslan Novikov",
+            "developmentTeam": "UG932QX48K",
+            "packageType": "development",
+            "buildFlag": [
+ 		"-UseModernBuildSystem=0",
+		"-UseNewBuildSystem=0"                     
+            ]
+        },
+        "release": {
+            "codeSignIdentity": "Ruslan Novikov",
+            "developmentTeam": "UG932QX48K",
+            "packageType": "app-store",
+            "buildFlag": [
+ 		"-UseModernBuildSystem=0",
+		"-UseNewBuildSystem=0"                     
+            ]
+        }
+    }
+}

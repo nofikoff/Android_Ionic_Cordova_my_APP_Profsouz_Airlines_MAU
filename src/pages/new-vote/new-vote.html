@@ -1,0 +1,94 @@
+<ion-header>
+
+    <ion-navbar *ngIf="!isEdit">
+        <ion-title>{{ 'NEW_VOTE_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+    <ion-navbar *ngIf="isEdit">
+        <ion-title>{{ 'EDIT_VOTE_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+            refreshingText="Refreshing..."></ion-refresher-content>
+    </ion-refresher>
+
+    <form [formGroup]="form">
+        <ion-list class="list-unstyled" inset>
+            <ion-item class='dropdown-branch'>
+                <ion-label>{{ 'BRANCH' | translate}}:</ion-label>
+                <ion-select formControlName="branch_id">
+                    <ion-option *ngFor="let item of branches" [value]="item.id">{{ item.name }}</ion-option>
+                </ion-select>
+            </ion-item>
+            <p *ngIf="!form.controls.branch_id.valid && submitted" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-input formControlName="title" type="text" placeholder="{{ 'TITLE' | translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="!form.controls.title.valid && submitted" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <div style="margin: 10px 0">
+                <div formArrayName="options" *ngFor="let item of form.get('options').controls; let i = index">
+                    <ion-item [formGroupName]="i">
+                        <ion-input type="text" placeholder="Option" formControlName="value"></ion-input>
+                        <button item-right (click)="deleteOption(i)" style="color: red; z-index: 255">x</button>
+                    </ion-item>
+                </div>
+                <ion-item>
+                    <label (click)="addOption()">
+                        <div ion-button>
+                            <ion-icon name="md-add"></ion-icon>
+                        </div>
+                        <span>{{ 'ADD_ANSWER' | translate}}</span>
+                    </label>
+                </ion-item>
+            </div>
+
+
+            <ion-item>
+                <ion-datetime formControlName="expiration_at" displayFormat="YYYY-MM-DD HH:mm:ss" placeholder="{{ 'DEADLINE' | translate}}"></ion-datetime>
+            </ion-item>
+            <p *ngIf="!form.controls.expiration_at.valid && submitted" class="error-msg">{{ 'ERROR_FIELDS' |
+                translate}}</p>
+
+            <file-picker formControlName="attachments" [files]="files" [multiple]="false" [onlyImage]="false"></file-picker>
+
+            <ion-item *ngFor="let attachment of attachments" (click)="removeFile(attachment.id)">
+                <div ion-button color="danger">
+                    <ion-icon name="md-close"></ion-icon>
+                </div>
+                <span>{{ attachment.name }}</span>
+            </ion-item>
+            <ion-item>
+                <ion-label>{{ 'WITH_SMS' | translate}}</ion-label>
+                <ion-checkbox formControlName="sms_notify"></ion-checkbox>
+            </ion-item>
+
+            <ion-item *ngIf="isEdit" margin-top>
+                <ion-label>{{ 'INFOSTATE' | translate}}</ion-label>
+                <ion-select formControlName="info_status_id">
+                    <ion-option value="{{ item.id }}" *ngFor="let item of info_statuses">{{ item.name }}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item *ngIf="isEdit" margin-top>
+                <ion-textarea formControlName="log_comment" rows="6" placeholder="{{ 'LOG_COMMENT' | translate}}"></ion-textarea>
+            </ion-item>
+
+            <ion-item margin-top>
+                <button ion-button color="primary" block (click)="submit()">{{ 'SEND' | translate}}</button>
+            </ion-item>
+            <ion-item>
+                <button ion-button color="secondary" block (click)="submit('draft')">
+                    {{ 'SAVE_DRAFT' | translate}}
+                </button>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

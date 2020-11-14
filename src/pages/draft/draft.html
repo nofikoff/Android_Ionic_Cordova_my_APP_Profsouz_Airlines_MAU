@@ -1,0 +1,25 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'DRAFT_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <post-list [posts]="posts"></post-list>
+
+    <ion-infinite-scroll (ionInfinite)="getNextPage($event)" *ngIf="hasMorePages()">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

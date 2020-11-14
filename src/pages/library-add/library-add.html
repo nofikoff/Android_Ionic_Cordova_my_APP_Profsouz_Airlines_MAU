@@ -1,0 +1,66 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'LIBRARY_TRANSLATE_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+            refreshingText="Refreshing..."></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list class="list-unstyled">
+        <form [formGroup]="form">
+            <ion-item class='dropdown-branch'>
+                <ion-label>{{ 'CATEGORY' | translate}}:</ion-label>
+                <ion-select formControlName="category">
+                    <ion-option value="{{ cat.id }}" *ngFor="let cat of categories">{{ cat.name }}</ion-option>
+                </ion-select>
+            </ion-item>
+            <p *ngIf="!form.controls.category.valid && submited" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-textarea rows="6" placeholder="Описание" formControlName="description"></ion-textarea>
+            </ion-item>
+            <p *ngIf="!form.controls.description.valid && submited" class="error-msg">
+                {{ 'ERROR_FIELDS' | translate}}
+            </p>
+
+            <ion-item margin-top *ngIf="!imageURI">
+                <label (click)="getFile()">
+                    <div ion-button>
+                        <ion-icon name="md-add"></ion-icon>
+                    </div>
+                    <span>
+                        {{ 'DOCUMENT_ADD' | translate}}
+                    </span>
+                </label>
+            </ion-item>
+            <ion-item *ngIf="imageURI" (click)="resetFile()">
+                <div ion-button color="gray">
+                    <ion-icon name="md-close"></ion-icon>
+                </div>
+                <span>{{ getFileName() }}</span>
+            </ion-item>
+            <p *ngIf="!imageURI && submited" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+        </form>
+
+        <ion-item margin-top>
+            <ion-label>{{ 'IMPORTANCE' | translate}}</ion-label>
+            <ion-checkbox [ngModel]="importance"></ion-checkbox>
+        </ion-item>
+        <ion-item margin-top>
+            <ion-label>{{ 'NOTIFY' | translate}}</ion-label>
+            <ion-checkbox [(ngModel)]="notify"></ion-checkbox>
+        </ion-item>
+        <ion-item margin-top>
+            <button ion-button color="primary" (click)="uploadFile()" block>{{ 'UPLOAD' | translate}}</button>
+        </ion-item>
+
+    </ion-list>
+</ion-content>

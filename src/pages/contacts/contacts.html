@@ -1,0 +1,40 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>
+            {{ 'CONTACTS_TITLE' | translate }}
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <div class="page-header full-width" style="min-height: 90px;">
+        <div class="search-panel active" id="search-panel">
+            <ion-icon name="ios-search"></ion-icon>
+            <ion-input type="text" [(ngModel)]="search" (ionChange)='searching()' placeholder="{{ 'SEARCH' | translate}}"></ion-input>
+        </div>
+    </div>
+
+    <ul class="list-unstyled list-bordered">
+        <li *ngFor="let user of users" class="full-width">
+            <div class="member-preview">
+                <div class="member-preview__photo" (click)="toProfile(user)"><img src="{{ user.avatar }}" alt=""></div>
+                <div class="member-preview__name" (click)="toProfile(user)">{{ user.full_name }}</div>
+                <ng-template [ngIf]="user.position">
+                    <div class="member-preview__position">{{ 'POSITION' | translate }}: {{ user.position }}</div>
+                </ng-template>
+                <ng-template [ngIf]="user.birthday">
+                    <div class="member-preview__position">{{ 'BIRTHDAY' | translate }}: {{ user.birthday }}</div>
+                </ng-template>
+                <div class="member-preview__position">{{ 'LAST_SEEN' | translate }}: {{ user.last_seen }}</div>
+                <div class="member-preview__phone"><a [href]="'tel:'+user.phone">{{ formatPhone(user.phone) }}</a></div>
+                <button class="btn-base member-preview__add" (click)="addToContact(user)">
+                    <ion-icon name="md-person-add"></ion-icon>
+                </button>
+            </div>
+        </li>
+    </ul>
+</ion-content>

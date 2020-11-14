@@ -1,0 +1,34 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'COMMENTS_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <ul class="list-unstyled list-bordered comments-list" *ngIf="comments.length">
+        <comments [comments]="comments" [reply_disabled]="!(post.is_commented && post.commentable)"></comments>
+    </ul>
+    <ion-infinite-scroll (ionInfinite)="getNextPage($event)" *ngIf="hasMorePages()">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <ng-template [ngIf]="post.is_commented && post.commentable" [ngIfElse]="commentsDisabled">
+        <button ion-button (click)="addComment()" block>{{ 'ADD_COMMENT' | translate}}</button>
+    </ng-template>
+    <ng-template #commentsDisabled>
+        <p >{{ 'COMMENTS_DISABLED' | translate}}</p>
+    </ng-template>
+
+</ion-content>

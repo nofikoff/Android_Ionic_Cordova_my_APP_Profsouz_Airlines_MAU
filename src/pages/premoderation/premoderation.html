@@ -1,0 +1,48 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'PREMODERATION_TITLE' | translate }}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <ul class="list-unstyled list-bordered">
+        <li *ngFor="let item of posts" class="full-width">
+            <div class="post-preview">
+                <div>
+                    <div class="post-preview__header">
+                        <div class="post-preview__photo"><img [src]="item.user.avatar" alt=""></div>
+                        <div class="post-preview__name">{{ item.user.full_name }} -</div>
+                        <div class="post-preview__cat link">[{{ item.type }}]</div>
+                        <div class="post-preview__date">{{ item.created_at }}</div>
+
+<button (click)="feedActionSheet(item)" class="btn-base dots-trigger">
+<span class="dots-trigger-base"></span>
+</button>
+
+
+                    </div>
+                    <div class="post-preview__body" (click)="toPost(item)">
+                        <div class="post-preview__title">{{ item.title }}</div>
+                        <div class="post-preview__desc" [innerHtml]="item.body"></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <ion-infinite-scroll (ionInfinite)="getNextPage($event)" *ngIf="hasMorePages()">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

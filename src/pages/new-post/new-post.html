@@ -1,0 +1,89 @@
+<ion-header>
+
+    <ion-navbar *ngIf="!post">
+        <ion-title>{{ 'NEW_POST_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+    <ion-navbar *ngIf="post">
+        <ion-title>{{ 'EDIT_POST_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <form [formGroup]="form">
+        <ion-list class="list-unstyled">
+         <ion-item  class='dropdown-branch'>
+                <ion-label>{{ 'BRANCH' | translate}}:</ion-label>
+                <ion-select formControlName="branch_id">
+                    <ion-option *ngFor="let item of branches" [value]="item.id">{{ item.name }}</ion-option>
+
+                </ion-select>
+            </ion-item>
+
+
+            <p *ngIf="!form.controls.branch_id.valid && submitted" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-input formControlName="title" type="text" placeholder="{{ 'TITLE' | translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="!form.controls.title.valid && submitted" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-textarea formControlName="body" rows="6"
+                              placeholder="{{ 'DESCRIPTION' | translate}}"></ion-textarea>
+            </ion-item>
+
+            <file-picker formControlName="attachments" [files]="attachments" [onlyImage]="true"></file-picker>
+
+            <ion-item *ngFor="let attachment of post.attachments" (click)="removeFile(attachment.id)">
+                <div ion-button color="danger">
+                    <ion-icon name="md-close"></ion-icon>
+                </div>
+                <span>{{ attachment.name }}</span>
+            </ion-item>
+            <ion-item>
+                <ion-label>{{ 'IS_COMMENTED' | translate}}</ion-label>
+                <ion-checkbox formControlName="is_commented"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+                <ion-label>{{ 'WITH_SMS' | translate}}</ion-label>
+                <ion-checkbox formControlName="sms_notify"></ion-checkbox>
+            </ion-item>
+
+            <ion-item *ngIf="post" margin-top>
+                <ion-label>{{ 'INFOSTATE' | translate}}</ion-label>
+                <ion-select formControlName="info_status_id">
+                    <ion-option value="{{ item.id }}" *ngFor="let item of info_statuses">{{ item.name }}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item *ngIf="post" margin-top>
+                <ion-textarea formControlName="log_comment" rows="6"
+                              placeholder="{{ 'LOG_COMMENT' | translate}}"></ion-textarea>
+            </ion-item>
+
+            <ion-item margin-top>
+                <button ion-button color="primary" block (click)="submit('published')">
+                    {{ 'SEND' | translate}}
+                </button>
+            </ion-item>
+            <ion-item>
+                <button ion-button color="secondary" block (click)="submit('draft')">
+                    {{ 'SAVE_DRAFT' | translate}}
+                </button>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

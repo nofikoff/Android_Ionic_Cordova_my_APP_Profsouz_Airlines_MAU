@@ -1,0 +1,40 @@
+<li class="full-width">
+    <div class="post-preview">
+        <div class="post-preview__header">
+            <div class="post-preview__photo" (click)="toProfile(item)"><img [src]="item.user.avatar" alt=""></div>
+            <div class="post-preview__name" (click)="toProfile(item)">{{ item.user.full_name }} -</div>
+            <div class="post-preview__cat link">[{{ item.type | translate }}]</div>
+            <div class="post-preview__cat link">[{{ item.branch_name }}]</div>
+            <div class="post-preview__cat link __draft" *ngIf="item.status === 'draft'">[{{ 'DRAFT' | translate }}]</div>
+            <div class="post-preview__date">{{ item.created_at }}</div>
+
+<button (click)="feedActionSheet(item)" class="btn-base dots-trigger">
+<span class="dots-trigger-base"></span>
+</button>
+
+        </div>
+        <div class="post-preview__body">
+            <div class="post-preview__title" (click)="toPost(item)">{{ item.title }}</div>
+            <div class="post-preview__desc" (click)="toPost(item)" [innerHtml]="item.body"></div>
+
+            <ion-list *ngIf="canVote()" [(ngModel)]="selected" radio-group>
+                <ion-item-group *ngFor="let option of item.question.options">
+                    <ion-item>
+                        <ion-label><b>{{ optionName(option) }}</b></ion-label>
+                        <ion-radio value="{{ option.id }}" [disabled]="item.question.user_option_id"
+                        ></ion-radio>
+                    </ion-item>
+                    <ion-item>
+                        <a *ngIf="item.question.can_set_winner" (click)="setWinner(item)"> {{ "VOTE_SET_WINNER" | translate }}</a>
+                    </ion-item>
+                </ion-item-group>
+                <button ion-button color="primary" block (click)="vote()">{{ "VOTE_BUTTON" | translate }}</button>
+            </ion-list>
+
+            <ion-item *ngIf="voted()">
+                <div *ngIf="item.question.winner_id">Результаты голосования: {{ winnerName() }}</div>
+                <canvas #barCanvas></canvas>
+            </ion-item>
+        </div>
+    </div>
+</li>

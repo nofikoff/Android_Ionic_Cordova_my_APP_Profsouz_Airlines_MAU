@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            {{ branch ? branch.name : 'LIBRARY_TITLE' | translate}}
+            <div class="page-header__buttons height_auto">
+                <button (click)="openNewLibrary()" ion-button>
+                    <ion-icon name="md-add"></ion-icon>
+                </button>
+            </div>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <div class="page-header full-width" style="min-height: 90px;">
+        <div class="search-panel active" id="search-panel">
+            <ion-icon name="ios-search"></ion-icon>
+            <ion-input type="text" [(ngModel)]="search" (ionChange)='searching()' placeholder="{{ 'SEARCH' | translate}}"></ion-input>
+        </div>
+    </div>
+
+    <ion-list class="sliding-list books">
+        <ion-item-sliding *ngFor="let item of documents" class="full-width">
+            <ion-item>
+                <div class="book-preview">
+                    <div class="book-preview__title">{{ item.description }}</div>
+                    <div class="book-preview__date">{{ item.created }}</div>
+                </div>
+                <div outline item-end>
+                    <button (click)="downloadDocument(item.id)" ion-button color="blue" clear icon-only>
+                        <ion-icon name='cloud-download'></ion-icon>
+                    </button>
+                    <button (click)="startCopyLink(item.id)" ion-button color="blue" clear icon-only>
+                        <ion-icon name='link'></ion-icon>
+                    </button>
+                </div>
+            </ion-item>
+            <ion-item-options>
+                <button ion-button color="danger">
+                    {{ 'DELETE' | translate}}
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+        <ion-infinite-scroll (ionInfinite)="getNextPage($event)" *ngIf="hasMorePages()">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,526 @@
+.btn-base
+   @extend .button;
+   background-color: transparent;
+   padding: 0;
+   font-size: inherit;
+
+
+.big-gray-text
+   font-size: 2.4rem;
+   color: #929292;
+   margin-bottom: 4rem;
+.middle-text
+   font-size: 1.8rem;
+   &:first-child
+      margin-top: 0
+//color: #929292;
+
+.padding-top
+//padding-top: 2rem
+
+.color-blue
+   color: #036cb7;
+.link
+   color: #036cb7;
+   text-decoration: underline;
+   &:hover
+      text-transform: none;
+
+
+.header-ios .toolbar-background-ios,
+.footer-ios .toolbar-background-ios
+   border-bottom: none
+
+.list-ios ion-item-options
+   border-bottom: none
+
+.item-ios[detail-push] .item-inner,
+button.item-ios:not([detail-none]) .item-inner,
+a.item-ios:not([detail-none]) .item-inner
+   background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCIgdmlld0JveD0iMCAwIDQ1MS44NDYgNDUxLjg0NyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDUxLjg0NiA0NTEuODQ3OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPHBhdGggZD0iTTM0NS40NDEsMjQ4LjI5MkwxNTEuMTU0LDQ0Mi41NzNjLTEyLjM1OSwxMi4zNjUtMzIuMzk3LDEyLjM2NS00NC43NSwwYy0xMi4zNTQtMTIuMzU0LTEyLjM1NC0zMi4zOTEsMC00NC43NDQgICBMMjc4LjMxOCwyMjUuOTJMMTA2LjQwOSw1NC4wMTdjLTEyLjM1NC0xMi4zNTktMTIuMzU0LTMyLjM5NCwwLTQ0Ljc0OGMxMi4zNTQtMTIuMzU5LDMyLjM5MS0xMi4zNTksNDQuNzUsMGwxOTQuMjg3LDE5NC4yODQgICBjNi4xNzcsNi4xOCw5LjI2MiwxNC4yNzEsOS4yNjIsMjIuMzY2QzM1NC43MDgsMjM0LjAxOCwzNTEuNjE3LDI0Mi4xMTUsMzQ1LjQ0MSwyNDguMjkyeiIgZmlsbD0iI2ZlYzIxMCIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);
+   background-size: 2rem 2rem;
+   background-position: center right 0
+   transition .3s
+   .active-slide &
+//background-position: center right 2rem
+
+.sliding-list
+   .item-ios[detail-push] .item-inner,
+   button.item-ios:not([detail-none]) .item-inner,
+   a.item-ios:not([detail-none]) .item-inner
+      padding-right: 0;
+   .item-block
+      padding-right: 16px;
+   .active-slide .item-block
+   //padding-right: 0
+   .item-wrapper
+      padding-left: 0;
+      padding-right: 0;
+      &:last-child .item-inner
+         border-bottom: 1px solid #cde2f1 !important
+      .item-inner
+         border-top: 1px solid #cde2f1 !important
+         padding-top: 1.3rem;
+         padding-bottom: 1.3rem;
+   .input-wrapper
+      font-weight: bold
+      font-size: 2.2rem
+
+
+
+.button
+   .icon
+      font-size: 2.7rem;
+
+.button.dots-trigger
+   height: 5px;
+   width: 5px;
+   background-color: #5f7c8a;
+   border-radius: 50%;
+   padding: 0;
+   overflow: visible;
+   contain: none;
+   &::before,
+   &::after
+      content: '';
+      position: absolute;
+      left: 0;
+      height: inherit;
+      width: inherit;
+      border-radius: inherit;
+      background-color: inherit;
+   &::before
+      top: -9px;
+   &::after
+      bottom: -9px;
+
+////////////////////////////////
+
+.page-header
+   padding: 2rem 0;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   position: relative;
+   &__title
+      font-size: 3.6rem;
+      font-weight: bold;
+   &__buttons
+      .button-ios
+      font-size: 1.8rem
+      margin: 0
+      height: 2.2em
+      padding: 0 .7em
+
+///////////////////////////////
+
+.select-language.list-ios.list > .item-block
+   border: none;
+   padding-left: 0;
+   margin-bottom: 1.5rem;
+   border-radius: .8rem;
+   .item-inner
+      border: none;
+      padding-right: 0;
+      position: relative;
+   .item-cover
+      padding: 0;
+   .input-wrapper
+      text-align: center;
+      justify-content: center;
+      background-color: #f2f2f2;
+      padding: 1.1rem 1rem;
+      border-radius: .8rem;
+   &.item-radio-checked .input-wrapper
+      background-color: #83d0f0;
+      .label
+         color: black;
+   .radio-ios
+      margin: 0;
+   .radio-icon
+      display: none;
+
+.item-ios
+
+   .item-button
+      height: 5.5rem;
+      line-height: 5.5rem;
+      font-size: 2rem;
+
+.ion-list,
+.list-ios
+   white-space: normal;
+
+ion-label
+   white-space: normal;
+
+.post-preview
+   text-align: right;
+   font-size: 1.3rem
+   &__header
+      display: flex;
+      margin-bottom: 2rem;
+      padding-left: 5rem;
+      flex-wrap: wrap;
+      text-align: left;
+      color: #bababa;
+      position: relative
+   &__photo
+      position: absolute;
+      top: -.3rem;
+      left: 0;
+      img
+         height: 4rem;
+         width: 4rem;
+         border-radius: 50%;
+   &__title
+      text-align: left;
+      font-weight: bold;
+      margin-bottom: 1rem;
+   &__date
+      width: 100%;
+   &__desc
+      margin-bottom: 2rem;
+      text-align: left;
+      img
+         max-width: none
+         width: calc(100% + 16px * 2)
+         margin: 0 -16px;
+
+.item-block
+   padding-left: 0
+   padding-right: 0
+.sliding-list
+   .item-block
+      padding-left: 16px;
+      padding-right: 16px;
+
+
+.list-unstyled
+   list-style: none;
+   padding: 0;
+   margin: 0;
+
+.list-bordered
+   & > li,
+   & > .item-wrapper
+      padding: 2rem 16px;
+      border-top: 1px solid #dfdfdf;
+      border-bottom: 1px solid #dfdfdf;
+
+.full-width
+   margin-left: -16px;
+   margin-right: -16px;
+   padding-left: 16px;
+   padding-right: 16px;
+ion-item-sliding.full-width
+   width: auto
+
+.members-preview
+   margin-bottom: 1rem;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   position: relative;
+   padding-right: calc(3.5rem + 16px);
+   padding-top: 1.7rem;
+   padding-bottom: 1.7rem;
+   border-top: 1px solid #dfdfdf;
+   border-bottom: 1px solid #dfdfdf;
+   position: relative;
+   &__overlay
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+   .icon
+      font-size: 4rem;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: calc(.5rem + 16px);
+      color: #fec210;
+      pointer-events: none;
+   &__title
+      font-size: 1.8rem;
+      font-weight: 500;
+   &__list
+      display: flex;
+   &__item
+      height: 3.3rem;
+      width: 3.3rem;
+      border-radius: 50%;
+      overflow: hidden;
+      &:not(:last-child)
+         margin-right: -1.5rem;
+
+
+
+// .list-ios
+//    margin: 0 -16px;
+// .item-ios.item-block .item-inner
+//    padding-right: 16px;
+//    padding-left: 16px;
+
+.item-ios.item-block .item-inner,
+.item-ios.item-block
+   &,
+   &:last-child,
+   &:first-child
+      border-bottom: none;
+      border-top: none;
+.label-ios
+   margin: 0;
+
+.list-ios > .item-block:last-child,
+.list-ios > .item-wrapper:last-child .item-block
+   border-bottom: none
+
+
+
+//////////////
+
+
+.search-panel
+   position: absolute;
+   top: 1.3rem;
+   left: 15px;
+   right: 15px;
+   background-color: #036cb7;
+   height: 5rem;
+   padding-left: 4rem;
+   display: none;
+   border-radius: 1.5rem;
+   &.active
+      display: block;
+   .icon
+      position: absolute;
+      top: 1.2rem;
+      left: 1.5rem;
+      font-size: 3rem;
+      color: white;
+   .text-input
+      line-height: 5rem;
+      margin: 0;
+      color: white;
+      font-size: 1.8rem;
+      border: none;
+      &::placeholder
+         color: white;
+
+
+
+
+///////////////////////////////
+
+.toolbar-ios
+   padding: 0;
+   padding-bottom: 2rem;
+   height: 7rem;
+   text-align: left;
+.toolbar-ios .title-ios
+   padding-left: 5rem;
+   padding-right: 16px;
+   .toolbar-title
+      display: flex
+      align-items: center
+      justify-content: space-between
+.toolbar-title
+   text-align: left;
+   font-size: 3rem;
+.toolbar-background-ios
+   background-color: #fff;
+
+.back-button
+   position: absolute;
+   bottom: 2rem;
+   left: 1.5rem;
+   color: black;
+.back-button-text
+   display: none;
+.back-button:not(.show-back-button) ~ .toolbar-content .title
+   padding-left: 16px;
+
+//////////////////////
+
+.text-input-ios
+   border: 1px solid #979797;
+   line-height: 5rem;
+   padding: 0 1.5rem;
+   border-radius: .5rem;
+   margin: 0;
+   margin-bottom: 1rem;
+   width: 100%;
+   font-weight: bold
+   &::placeholder
+      font-weight: 400
+   &.invalid,
+   &.error,
+   .invalid &,
+   .error &
+      border: 2px solid #ff3c3c;
+textarea.text-input
+   padding-top: 1rem;
+   padding-bottom: 1rem;
+   line-height: 1.4;
+
+
+.datetime-ios
+   width: 100%;
+   padding: 0;
+   margin-bottom: 1rem;
+   .datetime-text
+      width: 100%;
+      border: 2px solid #979797;
+      line-height: 4rem;
+      padding: 0 1.5rem;
+      border-radius: .5rem;
+      margin: 0;
+      width: 100%;
+
+.item-radio,
+.item-checkbox
+   position: relative
+   min-height: 5rem
+   padding-left: 5.5rem
+   .checkbox,
+   .radio
+      position: absolute !important
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+   .checkbox-ios,
+   .radio-ios
+      margin-left: 0
+
+
+
+.checkbox-ios,
+.radio-ios
+   .checkbox-icon,
+   .radio-icon
+      height: 3.8rem;
+      width: 4rem;
+      border-radius: .5rem;
+      border: 2px solid #979797;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   .checkbox-checked,
+   .radio-checked
+      background-color: transparent;
+      text-align: center;
+      border-color: #fec210;
+      &::before
+         content: '0';
+         color: #fec210;
+         font-weight: bold;
+         padding-bottom: .4rem;
+   .checkbox-inner,
+   .radio-inner
+      display: none;
+
+
+
+
+.checkbox-ios ~ .item-inner,
+.radio-ios ~ .item-inner
+   color: #979797;
+   font-weight: bold;
+
+
+
+.inputfile
+   width: 0.1px;
+   height: 0.1px;
+   opacity: 0;
+   overflow: hidden;
+   position: absolute;
+   z-index: -1;
+.inputfile + label
+   font-size: 2rem;
+   color: #036cb7;
+   background-color: transparent;
+   display: inline-block;
+   cursor: pointer; /* "hand" cursor */
+   display: flex;
+   align-items: center;
+
+   *
+      pointer-events: none;
+   .item-button
+      height: 4rem;
+      width: 4rem;
+      margin-right: 1rem;
+
+
+/////////////
+
+.button-ios
+   height: 3em;
+   font-size: 1.8rem;
+
+.button-ios-light
+   color: #828080;
+   background-color: #e6e6e6
+   font-size: 1.6rem
+
+.button-ios-secondary
+   color: #fff;
+
+.item-ios .button-narrow
+   height: 4.5rem
+   font-size: 1.6rem
+
+
+///////////////
+
+.attachment
+   padding-left: 4rem;
+   display: block;
+   width: 100%;
+   text-align: left;
+   min-height: 5rem;
+   position: relativel
+   font-size: 1.8rem;
+   margin-bottom: 1rem
+   color: #036cb7
+   .icon
+      position: absolute;
+      top: .2rem
+      left: 1rem
+      font-size: 4.5rem
+      color: #fec210;
+      transform: rotate(45deg)
+
+
+.tabs-ios .tabbar
+   border-top: none;
+.tabs-ios[tabsLayout=title-hide] .tab-button,
+.tabs-ios .tab-button.icon-only
+   height: 5rem
+
+
+/////////////////
+
+.menu-inner
+   .title
+      padding-left: 16px
+   .item-block
+      padding-left: 1.6rem;
+      padding-right: 1.6rem;
+
+.scroll-content
+   padding-bottom: 5rem !important
+
+.splash-screen-image
+   height: 100vh
+   width: 100vw
+   display: flex
+   align-items: center
+   justify-content: center
+
+.post-preview .post-preview__comments
+   bottom: 8px

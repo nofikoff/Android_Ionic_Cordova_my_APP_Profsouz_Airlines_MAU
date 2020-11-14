@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ 'POST_DETAIL_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <div class="post-preview" *ngIf="post.user">
+        <div class="post-preview__header">
+            <div class="post-preview__photo">
+                <img [src]="post.user.avatar" alt="">
+            </div>
+            <div class="post-preview__name">{{ post.user.full_name }} -</div>
+            <div class="post-preview__cat link">[{{ post.type | translate }}]</div>
+            <div class="post-preview__cat link">{{ post.branch_name }}</div>
+            <div class="post-preview__cat link __draft" *ngIf="post.status === 'draft'">[{{ 'DRAFT' | translate }}]</div>
+            <div class="post-preview__date">{{ post.created_at }}</div>
+
+<button (click)="feedActionSheet()" class="btn-base dots-trigger">
+<span class="dots-trigger-base"></span>
+</button>
+
+        </div>
+        <div class="post-preview__body">
+            <div class="post-preview__title" [class._urgent]="post.importance">{{ post.title }}</div>
+            <div class="post-preview__desc">
+                <p [innerHTML]="post.body"></p>
+            </div>
+            <div class="post-preview__images" *ngIf="post.images.length">
+                <div class="post-preview__image" *ngFor="let image of post.images">
+                    <img [src]="image.url" alt="">
+                </div>
+            </div>
+            <ng-template ngFor let-doc [ngForOf]="post.attachments">
+                <button *ngIf="doc.type !== 'image'" class="btn-base attachment" (click)="downloadAttachment(doc.id)">
+                    <ion-icon name="ios-attach"></ion-icon>
+                    <span>{{ doc.name }}</span>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+    <button ion-button block *ngIf="post.commentable" (click)="addComment()">{{ 'CREATE_COMMENT' | translate}}</button>
+    <button class="btn-base post-preview__comments link" *ngIf="post.commentable || post.comments_count"
+            (click)="toPostComments(post)">
+        [{{ post.comments_count }} {{ 'COMMENT' | translate}}]
+    </button>
+</ion-content>

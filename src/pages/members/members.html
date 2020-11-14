@@ -1,0 +1,31 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'MEMBERS_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <ul class="list-unstyled list-bordered">
+        <li *ngFor="let user of users" class="full-width">
+            <div class="member-preview">
+                <div class="member-preview__photo" (click)="toProfile(user)"><img src="{{ user.avatar }}" alt=""></div>
+                <div class="member-preview__name" (click)="toProfile(user)">{{ user.full_name }}</div>
+                <div class="member-preview__position">{{ user.position }}</div>
+                <div class="member-preview__phone"><a [href]="'tel:'+user.phone">{{ formatPhone(user.phone) }}</a></div>
+            </div>
+        </li>
+    </ul>
+</ion-content>

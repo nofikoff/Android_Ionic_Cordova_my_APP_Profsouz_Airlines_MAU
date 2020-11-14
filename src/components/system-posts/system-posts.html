@@ -1,0 +1,19 @@
+<ul class="list-unstyled list-bordered">
+    <li class="full-width" *ngFor="let item of posts">
+        <div class="post-preview">
+            <div class="post-preview__header">
+                <div class="post-preview__name">{{ 'SYSTEM_POST_TITLE' | translate }}</div>
+                <div class="post-preview__date">{{ item.created_at }}</div>
+
+<button (click)="feedActionSheet(item.id)" class="btn-base dots-trigger">
+<span class="dots-trigger-base"></span>
+</button>
+
+
+            </div>
+        </div>
+        <div class="post-preview__body">
+            <div class="post-preview__desc" [innerHtml]="item.body"></div>
+        </div>
+    </li>
+</ul>

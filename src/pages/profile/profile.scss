@@ -1,0 +1,49 @@
+page-profile {
+
+}
+.profile {
+   text-align: center;
+   //padding-left: 1rem;
+   //padding-right: 1rem;
+   &__photo {
+       height: 11rem;
+       width: 11rem;
+       margin-left: auto;
+       margin-right: auto;
+       margin-bottom: 1rem;
+       img {
+          overflow: hidden;
+          height: inherit;
+          width: inherit;
+          border-radius: 50%;
+       }
+   }
+   &__name {
+       font-weight: bold;
+       font-size: 2rem;
+       margin-bottom: 2rem;
+   }
+   &__tools {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #cde2f1;
+      border-bottom: 1px solid #cde2f1;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      margin-bottom: 1rem;
+   }
+}
+.profile-button {
+   text-align: left;
+   padding-left: 3.5rem;
+   font-size: 1.3rem;
+   font-weight: bold;
+   .icon {
+       position: absolute;
+       top: 0;
+       left: 0;
+       font-size: 3rem;
+       color: #fec210;
+   }
+}

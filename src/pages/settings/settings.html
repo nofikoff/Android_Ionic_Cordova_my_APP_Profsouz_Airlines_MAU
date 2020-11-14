@@ -1,0 +1,35 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ "SETTINGS_TITLE" | translate }}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <ion-list radio-group class="select-language" (ionChange)="selectLanguage($event)">
+        <ion-item>
+            <ion-label>{{ "SETTINGS_UA" | translate }}</ion-label>
+            <ion-radio value="uk"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>{{ "SETTINGS_RU" | translate }}</ion-label>
+            <ion-radio value="ru"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>{{ "SETTINGS_EN" | translate }}</ion-label>
+            <ion-radio value="en"></ion-radio>
+        </ion-item>
+    </ion-list>
+
+    <ion-list class="settings-list">
+        <ion-item *ngFor="let branch of branches">
+            <ion-label>{{ branch.name }}</ion-label>
+            <ion-toggle [(ngModel)]="branch.follow" (ngModelChange)="changeBranch(branch)"></ion-toggle>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

@@ -1,0 +1,65 @@
+<ion-header>
+
+  <div *ngIf="errors" class="fixed-error-message">
+    <span>Исправьте ошибки в отмеченных полях</span>
+  </div>
+  <ion-navbar>
+    <ion-title>{{ 'SIGN_UP_TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <form>
+    <ion-list>
+
+      <ion-item>
+        <p>
+          {{ 'SUPPORT_INTRO' | translate }}
+          <a href='tel:+380938537020'>+380938537020</a> <br> <br>
+        </p>
+      </ion-item>
+
+      <ion-item>
+        <ion-input [class.error]="isError('first_name')" type="text" [(ngModel)]="account.first_name" name="first_name"
+          placeholder="{{ 'SIGN_UP_FIRST_NAME' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [class.error]="isError('last_name')" type="text" [(ngModel)]="account.last_name" name="last_name"
+          placeholder="{{ 'SIGN_UP_LAST_NAME' | translate }}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input [brmasker]="{mask:'+00(000)000-00-00', len:17}" [class.error]="isError('phone')" type="tel"
+          [(ngModel)]="account.phone" name="phone" placeholder="{{ 'SIGN_UP_PHONE' | translate }}"></ion-input>
+      </ion-item>
+
+      <!--
+      Want to add a Username? Here you go:
+
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
+      </ion-item>
+      -->
+
+      <ion-item>
+        <ion-input [class.error]="isError('password')" type="password" [(ngModel)]="account.password" name="password"
+          placeholder="{{ 'SIGN_UP_PASSWORD' | translate }}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input [class.error]="isError('password_confirmation')" type="password" [(ngModel)]="account.password_confirmation"
+          name="password_confirmation" placeholder="{{ 'SIGN_UP_PASSWORD_CONFIRM' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button color="primary" block [disabled]="isProceed" (click)="doSignup()">{{ 'SIGN_BUTTON' |
+          translate }}</button>
+      </ion-item>
+
+    </ion-list>
+  </form>
+</ion-content>

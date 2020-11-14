@@ -1,0 +1,73 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'EDIT_PROFILE_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <form [formGroup]="form">
+        <ion-list class="list-unstyled" *ngIf="profile">
+            <ion-item>
+                <button class="btn-base edit-photo" (click)="filterActionSheet()">
+                    <img [src]="profile.avatar" alt="">
+                    <ion-icon name="md-create"></ion-icon>
+                </button>
+            </ion-item>
+            <p *ngIf="profile.no_avatar && submitted" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+            <ion-item>
+                <ion-input formControlName="first_name" type="text"
+                           placeholder="{{ 'FIRST_NAME'| translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="!form.controls.first_name.valid && submitted" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-input formControlName="last_name" type="text"
+                           placeholder="{{ 'LAST_NAME' | translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="!form.controls.last_name.valid && submitted" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-input formControlName="phone" type="text"
+                           placeholder="{{ 'PHONE_NUMBER' | translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="!form.controls.phone.valid && submitted" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-input formControlName="position" type="text" placeholder="{{ 'POSITION' | translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="!form.controls.position.valid && submitted" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+            <ion-item>
+                <ion-datetime formControlName="birthday" displayFormat="MM/DD/YYYY"
+                              placeholder="{{ 'BIRTHDAY' | translate}}"></ion-datetime>
+            </ion-item>
+            <p *ngIf="!form.controls.birthday.valid && submitted" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-input formControlName="password" type="password"
+                           placeholder="{{ 'PASSWORD' | translate}}"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input formControlName="password_confirm" type="password"
+                           placeholder="{{ 'PASSWORD_CONFIRMATION' | translate}}"></ion-input>
+            </ion-item>
+            <ion-item>
+                <button ion-button color="primary" block (click)="submit()">
+                    {{ 'READY' | translate}}
+                </button>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ 'POST_DETAIL_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <ul class="list-unstyled list-bordered">
+        <li *ngIf="post" class="full-width">
+            <div class="post-preview">
+                <div class="post-preview__header">
+                    <div class="post-preview__photo"><img [src]="post.user.avatar" alt=""></div>
+                    <div class="post-preview__name">{{ post.user.full_name }}</div>
+                    <div class="post-preview__date">{{ post.created_at }}</div>
+                </div>
+                <div class="post-preview__body">
+                    <div class="post-preview__desc" [innerHTML]="post.body"></div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <ul>
+        <li *ngFor="let item of logs">
+            <!--{{ item.created_at }} Change {{ item.type }} {{ item.user.full_name }} Администраторы notification, readonly-->
+            <!--test admin::log.new_title: {{ item.value }}.-->
+            {{ getText(item) }}
+        </li>
+    </ul>
+
+    <ion-infinite-scroll (ionInfinite)="getNextPage($event)" *ngIf="hasMorePages()">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

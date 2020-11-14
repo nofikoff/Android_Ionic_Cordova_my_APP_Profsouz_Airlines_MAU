@@ -1,0 +1,27 @@
+page-notifications {
+   .list-bordered > li, 
+   .list-bordered > .item-wrapper {
+       padding: 1rem 16px;
+   }
+   .post-preview {
+      &__desc {
+          margin-bottom: 0;
+          font-size: 1.4rem;
+      }
+      &__header {
+         padding-top: .5rem;
+         margin-bottom: 0.5rem;
+      }
+      &__photo {
+         top: 0rem;
+      }
+   }
+
+   .post-preview.__unread {
+      font-weight: bold;
+   }
+
+   .post-preview__body {
+      padding-left: 5rem;
+   }
+}

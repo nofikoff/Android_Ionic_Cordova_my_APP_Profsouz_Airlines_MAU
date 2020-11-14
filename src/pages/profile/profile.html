@@ -1,0 +1,56 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'PROFILE_TITLE' | translate }}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <div *ngIf="profile" class="profile">
+        <div class="profile__photo">
+            <img [src]="profile.avatar" alt="">
+        </div>
+        <div class="profile__name">{{ getFullName() }}</div>
+        <div class="member-preview__phone"><a [href]="'tel:'+profile.phone">{{ formatPhone(profile.phone) }}</a></div>
+        <ng-template [ngIf]="profile.position">
+            <div class="member-preview__position">{{ 'POSITION' | translate }}: {{ profile.position }}</div>
+        </ng-template>
+        <ng-template [ngIf]="profile.birthday">
+            <div class="member-preview__position">{{ 'BIRTHDAY' | translate }}: {{ profile.birthday }}</div>
+        </ng-template>
+        <div class="member-preview__position">{{ 'LAST_SEEN' | translate }}: {{ profile.last_seen }}</div>
+
+        <div class="profile__tools" *ngIf="self">
+            <button class="btn-base profile-button" (click)="comments()">
+                <ion-icon name="ios-chatboxes"></ion-icon>
+                <span>{{ 'PROFILE_MY' | translate }}<br> {{ 'PROFILE_COMMENTS' | translate }}</span>
+            </button>
+            <button class="btn-base profile-button" (click)="editProfile()">
+                <ion-icon name="md-create"></ion-icon>
+                <span>{{ 'PROFILE_EDIT' | translate }}<br> {{ 'PROFILE_PROFILE' | translate }}</span>
+            </button>
+        </div>
+        <div *ngIf="!self" style="margin: 20px 0">
+            <button ion-button (click)="setUserConfirm(true)" *ngIf="!profile.is_confirmed" block>{{ 'PROFILE_ACTIVATE' | translate }}</button>
+            <button ion-button (click)="setUserConfirm(false)" class="button-ios-danger" *ngIf="profile.is_confirmed" block>{{ 'PROFILE_DEACTIVATE' | translate }}</button>
+        </div>
+    </div>
+
+    <post-list [posts]="posts"></post-list>
+
+    <ion-infinite-scroll (ionInfinite)="getNextPage($event)" *ngIf="hasMorePages()">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,47 @@
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <div class="page-header full-width" style="min-height: 90px;">
+        <div class="page-header__title search-hide">{{ 'FEED_TITLE' | translate}}</div>
+        <div class="page-header__buttons search-hide">
+            <button (click)="toggleSearch()" ion-button>
+                <ion-icon name="ios-search"></ion-icon>
+            </button>
+            <button (click)="filterActionSheet()" ion-button>
+                <ion-icon name="options"></ion-icon>
+            </button>
+            <button (click)="openPage('NewPostPage')" ion-button>
+                <ion-icon name="md-add"></ion-icon>
+            </button>
+        </div>
+        <div class="search-panel" id="search-panel">
+            <ion-icon name="ios-search" (click)="toggleSearch()"></ion-icon>
+            <ion-input type="text" name="phone" placeholder="{{ 'SEARCH' | translate}}"></ion-input>
+        </div>
+    </div>
+    <div class="members-preview full-width" *ngIf="users.length && branch">
+        <button class="btn-base members-preview__overlay" (click)="openPage('MembersPage', {users: users})"></button>
+        <div class="members-preview__title">{{ 'PARTY' | translate}}: <span class="color-blue">{{ users.length }}</span>
+        </div>
+        <ul class="list-unstyled members-preview__list">
+            <li class="members-preview__item" *ngFor="let user of users.slice(0,5)">
+                <img src="{{ user.avatar }}" alt="">
+            </li>
+        </ul>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+    </div>
+    <post-list [posts]="posts"></post-list>
+
+    <ion-infinite-scroll (ionInfinite)="getNextPage($event)" *ngIf="hasMorePages()">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>

@@ -1,0 +1,27 @@
+page-edit-profile {
+
+}
+.edit-photo {
+    height: 10rem;
+    width: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: visible;
+    contain: none;
+    display: block;
+    img {
+       overflow: hidden;
+       height: inherit;
+       width: inherit;
+       border-radius: 50%;
+    }
+    .icon {
+       position: absolute;
+       bottom: 0rem;
+       right: -1rem;
+       color: #fec210;
+       font-size: 2.6rem;
+    }
+}

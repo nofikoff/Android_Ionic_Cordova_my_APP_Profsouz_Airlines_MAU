@@ -1,0 +1,14 @@
+<ion-item *ngFor="let file of _files; let i = index" (click)="removeFile(i)">
+  <div ion-button color="gray">
+    <ion-icon name="md-close"></ion-icon>
+  </div>
+  <span>{{ getFileName(file) }}</span>
+</ion-item>
+<ion-item margin-top *ngIf="_files.length === 0 || multiple">
+  <label (click)="filterActionSheet()">
+    <div ion-button>
+      <ion-icon name="md-add"></ion-icon>
+    </div>
+    <span>{{(onlyImage ? 'IMAGE_ADD' : 'DOCUMENT_ADD') | translate}}</span>
+  </label>
+</ion-item>

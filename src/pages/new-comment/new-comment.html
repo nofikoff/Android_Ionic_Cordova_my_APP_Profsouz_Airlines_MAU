@@ -1,0 +1,34 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Комментарий</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <form [formGroup]="form">
+        <ion-list class="list-unstyled">
+            <ion-item>
+                <ion-textarea formControlName="text" rows="7" placeholder="Оставьте свой комментарий"></ion-textarea>
+            </ion-item>
+
+            <file-picker formControlName="attachments" [files]="attachments" [multiple]="false" [onlyImage]="true" ></file-picker>
+
+            <ion-item margin-top>
+                <button ion-button color="primary" block (click)="submit()">Отправить</button>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

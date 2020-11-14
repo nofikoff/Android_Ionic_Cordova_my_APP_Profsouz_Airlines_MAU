@@ -1,0 +1,19 @@
+page-feed {
+   .page-header__buttons {
+      padding: 0;
+   }
+}
+.post-preview {
+    position: relative;
+   .dots-trigger {
+      position: absolute;
+      top: 1.5rem;
+      right: 0;      
+   }
+}
+
+.page-header__buttons button.button-ios {
+    height: 6em;
+    width: 6em;
+    font-size: 0.8rem;
+}

@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ "VOTE_TITLE" | translate }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <p class="middle-text">
+        {{ post.title }}
+    </p>
+    <button class="btn-base attachment">
+        <ion-icon name="ios-attach"></ion-icon>
+        <span>{{ "VOTE_ATTACHMENT" | translate }}</span>
+    </button>
+
+    <div *ngIf="post.question.winner_id">Результаты голосования: {{ winnerName() }}</div>
+
+    <canvas #barCanvas></canvas>
+
+</ion-content>

@@ -1,0 +1,42 @@
+<li class="full-width">
+    <div class="post-preview">
+        <div class="post-preview__header">
+            <div class="post-preview__photo" (click)="toProfile(item)"><img [src]="item.user.avatar" alt=""></div>
+            <div class="post-preview__name" (click)="toProfile(item)">{{ item.user.full_name }} -</div>
+            <div class="post-preview__cat link">[{{ item.type | translate }}]</div>
+            <div class="post-preview__cat link __draft" *ngIf="item.status === 'draft'">[{{ 'DRAFT' | translate }}]</div>
+            <div class="post-preview__date">{{ item.created_at }}</div>
+
+<button (click)="feedActionSheet(item)" class="btn-base dots-trigger">
+<span class="dots-trigger-base"></span>
+</button>
+
+
+
+
+        </div>
+        <div class="post-preview__body">
+            <div class="post-preview__title" (click)="toPost(item)">{{ item.title }}</div>
+            <div class="post-preview__image" (click)="toPost(item)" *ngIf="item.images.length">
+                <img [src]="item.images[0].url" alt="">
+            </div>
+            <div class="post-preview__desc" (click)="toPost(item)">
+                <p [innerHTML]="item.body"></p>
+            </div>
+            <button class="btn-base attachment" *ngIf="item.pdf" (click)="downloadPdf(item.id)">
+                <ion-icon name="ios-attach"></ion-icon>
+                <span>{{ 'PDF_DOCUMENT' | translate}}</span>
+            </button>
+            <ng-template *ngFor="let doc of item.attachments">
+                <button class="btn-base attachment" *ngIf="doc.type !== 'image'" (click)="downloadAttachment(doc.id)">
+                    <ion-icon name="ios-attach"></ion-icon>
+                    <span>{{ doc.name }}</span>
+                </button>
+            </ng-template>
+        </div>
+        <button class="btn-base post-preview__comments link" *ngIf="item.commentable || item.comments_count"
+                (click)="toPostComments(item)">
+            [{{ item.comments_count }} {{ 'COMMENT' | translate}}]
+        </button>
+    </div>
+</li>

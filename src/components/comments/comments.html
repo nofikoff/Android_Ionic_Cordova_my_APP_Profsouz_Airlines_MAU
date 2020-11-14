@@ -1,0 +1,22 @@
+<ul class="list-unstyled list-bordered comments-list" *ngIf="comments.length">
+    <li *ngFor="let comment of comments" class="full-width">
+        <div class="post-preview">
+            <div class="post-preview__header">
+                <div class="post-preview__photo" (click)="toProfile(comment)"><img [src]="comment.user.avatar" alt=""></div>
+                <div class="post-preview__name" (click)="toProfile(comment)">{{ comment.user.full_name }}</div>
+                <div class="post-preview__date">{{ comment.created_at }}</div>
+            </div>
+            <div class="post-preview__body">
+                <img src="{{ comment.image }}" alt="" *ngIf="comment.image">
+                <div class="post-preview__desc">{{ comment.text }}</div>
+                <button class="btn-base post-preview__comments link" *ngIf="comment.can_edit" (click)="toEdit(comment)">
+                    [{{ 'EDIT' | translate }}]
+                </button>
+                <button class="btn-base post-preview__comments link" *ngIf="!reply_disabled" (click)="reply(comment)">[{{ 'ANSWER' | translate }}]
+                </button>
+            </div>
+        </div>
+
+        <comments *ngIf="comment.children.length" [comments]="comment.children"></comments>
+    </li>
+</ul>

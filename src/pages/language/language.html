@@ -1,0 +1,24 @@
+<ion-content padding>
+    <p class="big-gray-text" text-center>
+        {{ 'SELECT_LANGUAGE' | translate }}
+    </p>
+    <ion-list radio-group [(ngModel)]="locale" (ionChange)="setLocale()" class="select-language">
+        <ion-item>
+            <ion-label>Українська</ion-label>
+            <ion-radio value="uk"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Русский</ion-label>
+            <ion-radio checked="true" value="ru"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>English</ion-label>
+            <ion-radio value="en"></ion-radio>
+        </ion-item>
+    </ion-list>
+
+    <button ion-button block (click)="startApp()">{{'CONTINUE' | translate}}</button>
+
+</ion-content>

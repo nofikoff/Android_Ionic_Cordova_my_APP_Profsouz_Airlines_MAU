@@ -1,0 +1,125 @@
+<!--
+  Generated template for the MoneyHelpPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'MONEY_HELP_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list class="list-unstyled">
+        <form [formGroup]="form">
+
+            <!--<input formControlName="phone"/>-->
+            <!--<p *ngIf="!form.controls.phone.valid">Ошибка</p>-->
+
+            <ion-item class='dropdown-branch'>
+                <ion-label>{{ "TITLE" | translate}}</ion-label>
+                <ion-select formControlName="title">
+                    <ion-option value="{{ item.name }}" *ngFor="let item of finn_types">{{ item.name }}</ion-option>
+                </ion-select>
+            </ion-item>
+            <p *ngIf="!form.controls.title.valid && submited" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-textarea rows="4" formControlName="body"
+                              placeholder="{{ 'DESCRIPTION' | translate}}"></ion-textarea>
+            </ion-item>
+            <p *ngIf="!form.controls.body.valid && submited" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item *ngIf="post">
+                <ion-label>{{ 'INFOSTATE' | translate}}</ion-label>
+                <ion-select formControlName="info_status_id">
+                    <ion-option value="{{ item.id }}" *ngFor="let item of info_statuses">{{ item.name }}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item *ngIf="post" margin-top>
+                <ion-textarea formControlName="log_comment" rows="6"
+                              placeholder="{{ 'LOG_COMMENT' | translate}}"></ion-textarea>
+            </ion-item>
+
+            <p *ngIf="!form.controls.info_status_id.valid && submited" class="error-msg">
+                {{ 'ERROR_FIELDS' | translate}}
+            </p>
+            <ion-item>
+                <ion-label>{{ 'PASSPORT' | translate}}</ion-label>
+                <ion-input type="text" formControlName="pdf_passport_seria"
+                           placeholder="{{ 'SERIAL' | translate}}"></ion-input>
+                <ion-input type="text" formControlName="pdf_passport_code"
+                           placeholder="{{ 'NUMBER' | translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="(!form.controls.pdf_passport_seria.valid || !form.controls.pdf_passport_code.valid )
+                && submited" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-input type="text" formControlName="pdf_extradited"
+                           placeholder="{{ 'ISSUED' | translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="!form.controls.pdf_extradited.valid && submited" class="error-msg">{{ 'ERROR_FIELDS' |
+                translate}}</p>
+
+            <ion-item>
+                <ion-input type="text" formControlName="pdf_identification"
+                           placeholder="{{ 'IDENTIFICATION_NUMBER' | translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="!form.controls.pdf_identification.valid && submited" class="error-msg">
+                {{ 'ERROR_FIELDS' | translate}}
+            </p>
+
+            <ion-item>
+                <ion-input type="text" formControlName="pdf_card"
+                           placeholder="{{ 'CARD_ACCOUNT' | translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="!form.controls.pdf_card.valid && submited" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-input type="text" formControlName="pdf_bank" placeholder="{{ 'BANK' | translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="!form.controls.pdf_bank.valid && submited" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-label>{{ 'SETTLEMENT_ACCOUNT' | translate}}</ion-label>
+                <ion-input type="text" formControlName="pdf_rr" placeholder="26004349343433747"></ion-input>
+            </ion-item>
+            <p *ngIf="!form.controls.pdf_rr.valid && submited" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <ion-item>
+                <ion-input type="text" formControlName="pdf_mfo" placeholder="{{ 'MFO' | translate}}"></ion-input>
+                <ion-input type="text" formControlName="pdf_edrpoy" placeholder="{{ 'EGRPOU' | translate}}"></ion-input>
+            </ion-item>
+            <p *ngIf="(!form.controls.pdf_mfo.valid || !form.controls.pdf_edrpoy.valid )
+                && submited" class="error-msg">{{ 'ERROR_FIELDS' | translate}}</p>
+
+            <file-picker formControlName="attachments" [files]="attachments" [onlyImage]="true"></file-picker>
+        </form>
+
+
+
+        <ion-item *ngFor="let attachment of post.attachments" (click)="removeFile(attachment.id)">
+            <div ion-button color="danger">
+                <ion-icon name="md-close"></ion-icon>
+            </div>
+            <span>{{ attachment.name }}</span>
+        </ion-item>
+        <ion-item>
+            <button ion-button color="primary" (click)="storeFinnHelp()" block>{{ 'SEND' | translate}}</button>
+        </ion-item>
+    </ion-list>
+</ion-content>

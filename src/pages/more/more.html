@@ -1,0 +1,64 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'MORE_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="profile-more" *ngIf="profile">
+        <button class="btn-base profile-more-account" (click)="openPage('ProfilePage')">
+            <div class="profile-more-account__photo">
+                <img [src]="profile.avatar" alt="">
+            </div>
+            <div class="profile-more-account__name">{{ getFullName() }}</div>
+            <div class="profile-more-account__desc">{{ 'MY_PROFILE' | translate}}</div>
+        </button>
+        <ion-list class="sliding-list">
+            <ion-item-sliding class="full-width">
+                <button ion-item (click)="openPage('DraftPage')">{{ 'MY_DRAFT' | translate}}</button>
+            </ion-item-sliding>
+            <ion-item-sliding class="full-width">
+                <button ion-item (click)="openPage('ContactsPage')">{{ 'CONTACTS' | translate}}</button>
+            </ion-item-sliding>
+            <ion-item-sliding class="full-width">
+                <button ion-item (click)="openPage('MoneyHelpPage')">{{ 'FINNHELP' | translate}}</button>
+            </ion-item-sliding>
+            <ion-item-sliding class="full-width">
+                <button ion-item (click)="openPage('LibraryPage')">
+                    {{ 'LIBRARY' | translate}}
+                </button>
+            </ion-item-sliding>
+            <ion-item-sliding class="full-width">
+                <button ion-item (click)="openPage('NewVotePage')">{{ 'CREATE_VOTE' | translate}}</button>
+            </ion-item-sliding>
+            <ion-item-sliding class="full-width">
+                <button ion-item (click)="openPage('PremoderationPage')">{{ 'PREMODERATION' | translate}}</button>
+            </ion-item-sliding>
+        </ion-list>
+        <ul class="profile-more-links list-unstyled">
+            <ion-list>
+                <ion-item>
+                    <button class="btn-base profile-more-links__link" (click)="openPage('AboutPage')">
+                        <ion-icon name="help-circle"></ion-icon>
+                        <span>{{ 'SUPPORT_HELP' | translate}}</span>
+                    </button>
+                </ion-item>
+                <ion-item>
+                    <button class="btn-base profile-more-links__link" (click)="openPage('SettingsPage')">
+                        <ion-icon name="cog"></ion-icon>
+                        <span>{{ 'SETTINGS' | translate}}</span>
+                    </button>
+                </ion-item>
+                <ion-item>
+                    <button class="btn-base profile-more-links__link" (click)="logout()">
+                        <ion-icon name="exit"></ion-icon>
+                        <span>{{ 'LOGOUT' | translate}}</span>
+                    </button>
+                </ion-item>
+            </ion-list>
+        </ul>
+    </div>
+</ion-content>

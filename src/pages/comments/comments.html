@@ -1,0 +1,45 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'COMMENTS_TITLE' | translate }}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <ul class="list-unstyled list-bordered comments-list">
+        <li *ngFor="let comment of comments" class="full-width">
+            <div class="post-preview">
+                <div class="post-preview__header">
+                    <div class="post-preview__photo"><img [src]="profile.avatar" alt=""></div>
+                    <div class="post-preview__name">{{ getFullName() }}</div>
+                    <div class="post-preview__date">{{ comment.created_at }}</div>
+                </div>
+                <div class="post-preview__body">
+                    <div class="post-preview__desc">{{ comment.text }}</div>
+                    <button class="btn-base post-preview__comments link" *ngIf="comment.can_edit" (click)="toEdit(comment)">
+                        [{{ 'EDIT' | translate }}]
+                    </button>
+                    <button class="btn-base post-preview__comments link" *ngIf="comment.can_reply" (click)="toPost(comment.post_id)">
+                        [{{ 'ANSWER' | translate }}]
+                    </button>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <ion-infinite-scroll (ionInfinite)="getNextPage($event)" *ngIf="hasMorePages()">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <!--<button ion-button block>Добавить комментарий</button>-->
+</ion-content>

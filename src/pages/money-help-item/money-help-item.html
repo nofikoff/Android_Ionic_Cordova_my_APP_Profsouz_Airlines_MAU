@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ 'MONEY_HELP_ITEM_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <div class="post-preview" *ngIf="post">
+        <div class="post-preview__header">
+            <div class="post-preview__photo">
+                <img [src]="post.user.avatar" alt="">
+            </div>
+            <div class="post-preview__name">{{ post.user.full_name }} -</div>
+            <div class="post-preview__cat link">[{{ post.type | translate }}]</div>
+            <div class="post-preview__cat link __draft" *ngIf="post.status === 'draft'">[{{ 'DRAFT' | translate }}]</div>
+            <div class="post-preview__date">{{ post.created_at }}</div>
+            <!--<button (click)="feedActionSheet()" class="btn-base dots-trigger"></button>-->
+        </div>
+        <div class="post-preview__body">
+            <div class="post-preview__title">{{ post.title }}</div>
+            <div class="post-preview__desc">
+                <p [innerHTML]="post.body"></p>
+            </div>
+            <div class="post-preview__images" *ngIf="post.images.length">
+                <div class="post-preview__image" *ngFor="let image of post.images">
+                    <img [src]="image.url" alt="">
+                </div>
+            </div>
+            <button class="btn-base attachment" *ngIf="post.pdf" (click)="downloadPdf(post.id)">
+                <ion-icon name="ios-attach"></ion-icon>
+                <span>{{ 'PDF_DOCUMENT' | translate}}</span>
+            </button>
+            <ng-template ngFor let-doc [ngForOf]="post.attachments">
+                <button *ngIf="doc.type !== 'image'" class="btn-base attachment" (click)="downloadAttachment(doc.id)">
+                    <ion-icon name="ios-attach"></ion-icon>
+                    <span>{{ doc.name }}</span>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+    <button ion-button block (click)="addComment()">{{ 'CREATE_COMMENT' | translate}}</button>
+    <button ion-button color="light" block (click)="goHistory()">{{ 'UPDATE_HISTORY' | translate}}</button>
+</ion-content>

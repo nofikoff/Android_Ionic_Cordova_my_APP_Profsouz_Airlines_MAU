@@ -1,0 +1,54 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{ 'NOTIFICATIONS_TITLE' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+
+<!-- это список сборных уведомлений в системе раз в сутки РАБОТАТЕ ХУЕВО пока отключить 
+<system-posts></system-posts>
+-->
+
+<!-- это  список служебных единичных уведомлений в системе, они открываются тут же в приложении -->
+    <ion-list class="list-bordered">
+        <ion-item-sliding *ngFor="let item of notifications" class="full-width">
+            <button ion-item (click)="goToEvent(item)">
+                <div class="post-preview" [class.__unread]="!item.read">
+                    <div class="post-preview__header">
+                        <div class="post-preview__photo"><img [src]="item.user.avatar" alt=""></div>
+                        <div class="post-preview__name">{{ item.user.full_name }}</div>
+                        <div class="post-preview__date" *ngIf="item.branch_name">{{ item.branch_name }}</div>
+                        <div class="post-preview__date" *ngIf="item.post_type">{{ item.post_type | translate }}</div>
+                        <div class="post-preview__date">{{ item.created_at }}</div>
+                    </div>
+                    <div class="post-preview__body">
+                        <div class="post-preview__desc">{{ item.text }}</div>
+                    </div>
+                </div>
+            </button>
+
+            <!--<ion-item-options>-->
+                <!--<button ion-button color="danger" (click)="deleteNotification(item.id)">-->
+                    <!--Удалить-->
+                <!--</button>-->
+            <!--</ion-item-options>-->
+        </ion-item-sliding>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="getNextPage($event)" *ngIf="hasMorePages()">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

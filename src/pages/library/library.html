@@ -1,0 +1,35 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>
+            {{ 'LIBRARY_TITLE' | translate}}
+            <div class="page-header__buttons height_auto">
+                <button (click)="openNewLibrary()" ion-button>
+                    <ion-icon name="md-add"></ion-icon>
+                </button>
+            </div>
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..."
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list class="sliding-list">
+        <ion-item-sliding *ngFor="let item of categories" class="full-width" (click)="loadCategory(item)">
+            <button ion-item>
+                {{ item.name }}
+            </button>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>
